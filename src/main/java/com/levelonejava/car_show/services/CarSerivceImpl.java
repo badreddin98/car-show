@@ -5,7 +5,7 @@ import com.levelonejava.car_show.dtos.CarResponse;
 import com.levelonejava.car_show.entities.Car;
 import com.levelonejava.car_show.exception.InvalidCarIdException;
 import com.levelonejava.car_show.repository.CarRepository;
-import com.levelonejava.car_utils.CarMapper;
+import com.levelonejava.car_show.car_utils.CarMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class CarSerivceImpl implements CarService {
     @Override
     public List<CarResponse> getAllCars() {
         return carRepository.findAll().stream()
-                .map(CarMapper :: toDto).toList();
+                .map(CarMapper::toDto).toList();
     }
 
     @Override
@@ -61,9 +61,8 @@ public class CarSerivceImpl implements CarService {
         return carRepository
                 .findAllByVehicleTypeIgnoreCase(
                     vehicleType
-                        .valueOf(vehicleType)
         ).stream()
-                .map(CarMapper:: toDto).toList();
+                .map(CarMapper::toDto).toList();
 
     }
 

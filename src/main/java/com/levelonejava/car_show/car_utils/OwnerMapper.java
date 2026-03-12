@@ -1,4 +1,4 @@
-package com.levelonejava.car_utils;
+package com.levelonejava.car_show.car_utils;
 
 import com.levelonejava.car_show.dtos.CarResponse;
 import com.levelonejava.car_show.dtos.OwnerRequest;

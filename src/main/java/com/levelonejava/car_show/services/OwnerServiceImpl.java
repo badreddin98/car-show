@@ -4,11 +4,10 @@ import com.levelonejava.car_show.dtos.OwnerRequest;
 import com.levelonejava.car_show.dtos.OwnerResponse;
 import com.levelonejava.car_show.entities.Owner;
 import com.levelonejava.car_show.enums.Gender;
-import com.levelonejava.car_show.exception.InvalidCarIdException;
 import com.levelonejava.car_show.exception.InvalidOwnerIdException;
 import com.levelonejava.car_show.repository.CarRepository;
 import com.levelonejava.car_show.repository.OwnerRepository;
-import com.levelonejava.car_utils.OwnerMapper;
+import com.levelonejava.car_show.car_utils.OwnerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -83,8 +82,8 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public void deleteCarById(long id) {
-        if (!ownerRepository.existsById(id)) throw new InvalidCarIdException("Owner Id " + " not found!");
+    public void deleteOwnerById(long id) {
+        if (!ownerRepository.existsById(id)) throw new InvalidOwnerIdException("Owner Id " + " not found!");
         ownerRepository.deleteById(id);
 
     }

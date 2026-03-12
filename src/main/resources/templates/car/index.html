@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Show | Car Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .add-btn {
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+            border: 2px solid #28a745;
+        }
+        .add-btn:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+            transform: translateY(-2px);
+        }
+        .add-btn:active {
+            transform: translateY(0);
+        }
+        .car-item {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .car-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .car-info {
+            flex: 1;
+        }
+        .car-info h3 {
+            margin: 0 0 12px 0;
+            color: #333;
+            font-size: 1.4em;
+        }
+        .car-details {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .car-detail {
+            font-size: 0.95em;
+            color: #666;
+        }
+        .car-detail strong {
+            color: #333;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            box-shadow: 0 2px 6px rgba(220, 53, 69, 0.2);
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+            transform: translateY(-1px);
+        }
+        .delete-btn:active {
+            transform: translateY(0);
+        }
+        .empty-message {
+            text-align: center;
+            color: #999;
+            padding: 60px 20px;
+            font-size: 1.1em;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .empty-message a {
+            color: #28a745;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #28a745;
+        }
+        .empty-message a:hover {
+            color: #218838;
+            border-bottom-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚗 Car Inventory</h1>
+            <a href="/car/create" class="add-btn">+ Add New Car</a>
+        </div>
+
+        <div th:if="${listOfCars.isEmpty()}" class="empty-message">
+            <p>No cars in inventory yet. <a href="/car/create">Click here to add one!</a></p>
+        </div>
+
+        <div th:unless="${listOfCars.isEmpty()}">
+            <div th:each="car: ${listOfCars}" class="car-item">
+                <div class="car-info">
+                    <h3 th:text="|${car.make()} ${car.model()}|"></h3>
+                    <div class="car-details">
+                        <div class="car-detail">
+                            <strong>Doors:</strong> <span th:text="${car.doorCount}"></span>
+                        </div>
+                        <div class="car-detail">
+                            <strong>Engine:</strong> <span th:text="${car.engineType}"></span>
+                        </div>
+                        <div class="car-detail">
+                            <strong>Type:</strong> <span th:text="${car.vehicleType}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <form th:action="@{/car/delete/{id}(id=${car.carId})}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this car?');">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

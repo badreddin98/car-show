@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Show | Car Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .error {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        button[type="submit"] {
+            padding: 12px 40px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+        .back-link {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .back-link:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Add a New Car</h2>
+    <form th:object="${newCar}" method="POST" th:action="@{/car/create}">
+      <input type="hidden" name="id" id="id" th:field="*{carId}">
+
+      <div class="form-group">
+        <label for="make">Make</label>
+        <input type="text" name="make" id="make" th:field="*{make}" placeholder="e.g., Toyota, Honda">
+        <span class="error" th:if="${#fields.hasErrors('make')}" th:errors="*{make}"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="model">Model</label>
+        <input type="text" name="model" id="model" th:field="*{model}" placeholder="e.g., Camry, Accord">
+        <span class="error" th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="engineType">Engine Type</label>
+        <select name="engineType" id="engineType" th:field="*{engineType}">
+          <option value="">-- Select Engine Type --</option>
+          <option value="V6_ENGINE">V6 Engine</option>
+          <option value="V8_ENGINE">V8 Engine</option>
+        </select>
+        <span class="error" th:if="${#fields.hasErrors('engineType')}" th:errors="*{engineType}"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="vehicleType">Vehicle Type</label>
+        <select name="vehcileType" id="vehicleType" th:field="*{vehcileType}">
+          <option value="">-- Select Vehicle Type --</option>
+          <option value="SEDAN">Sedan</option>
+          <option value="TRUCK">Truck</option>
+          <option value="SUV">SUV</option>
+          <option value="RV">RV</option>
+        </select>
+        <span class="error" th:if="${#fields.hasErrors('vehcileType')}" th:errors="*{vehcileType}"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="doorCount">Door Count</label>
+        <input type="number" name="doorCount" id="doorCount" th:field="*{doorCount}" placeholder="2-6 doors">
+        <span class="error" th:if="${#fields.hasErrors('doorCount')}" th:errors="*{doorCount}"></span>
+      </div>
+
+      <div class="button-container">
+        <button type="submit">Submit</button>
+        <a href="/car/" class="back-link">Cancel</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

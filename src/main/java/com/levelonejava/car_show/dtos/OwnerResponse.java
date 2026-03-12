@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public record OwnerResponse(
 
-            long carId,
+            long onwerId,
             String firstName,
             String lastName,
             Gender gender,

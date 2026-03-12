@@ -13,6 +13,7 @@ public interface OwnerService {
     List<OwnerResponse> getOwersByFirstName(String firstName);
     List<OwnerResponse> getOwnersByLastName(String lastName);
     List<OwnerResponse> getOwnersByDateOfBirth (String dateOfBirth);
+    List<OwnerResponse> getOwnersByGender (String gender);
     OwnerResponse updateOwnerInformation(OwnerRequest ownerRequest);
-    void deleteCarById(long id);
+    void deleteOwnerById(long id);
 }

@@ -8,7 +8,6 @@ import com.levelonejava.car_show.enums.VehicleType;
 import com.levelonejava.car_show.repository.CarRepository;
 import com.levelonejava.car_show.repository.OwnerRepository;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -78,7 +77,7 @@ public class DbInit implements CommandLineRunner {
         camry.setMake("Toyota");
         camry.setModel("Camry");
         camry.setEngineType(EngineType.V6_ENGINE);
-        camry.setDoorCount((byte) 4);
+        camry.setDoorCount((byte) 4); // num
         camry.setVehicleType(VehicleType.SEDAN); // ⚠️ Typo in enum — should be SEDAN
         camry.setOwner(priya);
 
