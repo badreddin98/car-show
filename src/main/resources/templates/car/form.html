@@ -93,8 +93,8 @@
 </head>
 <body>
   <div class="form-container">
-    <h2>Add a New Car</h2>
-    <form th:object="${newCar}" method="POST" th:action="@{/car/create}">
+    <h2 th:text="${isEdit ? 'Edit Car' : 'Add a New Car'}"></h2>
+    <form th:object="${newCar}" method="POST" th:action="${isEdit ? '/car/update/' + newCar.carId : '/car/create'}">
       <input type="hidden" name="id" id="id" th:field="*{carId}">
 
       <div class="form-group">

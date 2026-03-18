@@ -21,7 +21,7 @@ public record CarRequest(
         @NotBlank(message = "Vehicle type cannot be blank")
         @Pattern(regexp = "^(SEDAN|TRUCK|SUV|RV)$", message = "Vehicle type must be SEDAN, TRUCK, SUV, or RV")
         String vehcileType,
-        
+
         @Min(value = 2, message = "Door count must be at least 2")
         @Max(value = 6, message = "Door count cannot exceed 6")
         byte doorCount

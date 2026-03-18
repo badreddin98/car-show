@@ -2,17 +2,20 @@ package com.levelonejava.car_show.config;
 
 import com.levelonejava.car_show.entities.Car;
 import com.levelonejava.car_show.entities.Owner;
+import com.levelonejava.car_show.entities.UserCredential;
 import com.levelonejava.car_show.enums.EngineType;
 import com.levelonejava.car_show.enums.Gender;
 import com.levelonejava.car_show.enums.VehicleType;
 import com.levelonejava.car_show.repository.CarRepository;
 import com.levelonejava.car_show.repository.OwnerRepository;
-
+import com.levelonejava.car_show.repository.UserCredentialRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,6 +27,8 @@ public class DbInit implements CommandLineRunner {
 
     private final OwnerRepository ownerRepository;
     private final CarRepository carRepository;
+    private final UserCredentialRepository userCredentialRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) {
@@ -55,6 +60,33 @@ public class DbInit implements CommandLineRunner {
 
         ownerRepository.saveAll(List.of(marcus, priya, jordan));
 
+        // --- User Credentials ---
+        String defaultPassword = passwordEncoder.encode("Admin");
+
+        UserCredential marcusUser = UserCredential.builder()
+                .email("marcus@carshow.com")
+                .password(defaultPassword)
+                .role("USER")
+                .owner(marcus)
+                .build();
+
+        UserCredential priyaUser = UserCredential.builder()
+                .email("priya@carshow.com")
+                .password(defaultPassword)
+                .role("USER")
+                .owner(priya)
+                .build();
+
+        UserCredential jordanUser = UserCredential.builder()
+                .email("jordan@carshow.com")
+                .password(defaultPassword)
+                .role("USER")
+                .owner(jordan)
+                .build();
+
+        userCredentialRepository.saveAll(List.of(marcusUser, priyaUser, jordanUser));
+        log.info("Seeded user accounts: marcus@carshow.com, priya@carshow.com, jordan@carshow.com (password: CarShow2026!)");
+
         // --- Marcus: classic muscle / truck guy ---
         Car mustang = new Car();
         mustang.setMake("Ford");
@@ -77,7 +109,7 @@ public class DbInit implements CommandLineRunner {
         camry.setMake("Toyota");
         camry.setModel("Camry");
         camry.setEngineType(EngineType.V6_ENGINE);
-        camry.setDoorCount((byte) 4); // num
+        camry.setDoorCount((byte) 4);
         camry.setVehicleType(VehicleType.SEDAN); // ⚠️ Typo in enum — should be SEDAN
         camry.setOwner(priya);
 
