@@ -5,7 +5,7 @@ import com.levelonejava.car_show.dtos.CarResponse;
 import com.levelonejava.car_show.entities.Car;
 import com.levelonejava.car_show.exception.InvalidCarIdException;
 import com.levelonejava.car_show.repository.CarRepository;
-import com.levelonejava.car_show.car_utils.CarMapper;
+import com.levelonejava.car_show.utils.CarMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

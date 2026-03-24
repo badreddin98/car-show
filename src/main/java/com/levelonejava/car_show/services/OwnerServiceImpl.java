@@ -7,7 +7,7 @@ import com.levelonejava.car_show.enums.Gender;
 import com.levelonejava.car_show.exception.InvalidOwnerIdException;
 import com.levelonejava.car_show.repository.CarRepository;
 import com.levelonejava.car_show.repository.OwnerRepository;
-import com.levelonejava.car_show.car_utils.OwnerMapper;
+import com.levelonejava.car_show.utils.OwnerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
